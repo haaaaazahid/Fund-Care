@@ -135,6 +135,11 @@ export default function LogoIntro() {
             />
           </div>
 
+          {/* Everything below — rings, coins, logo, and the text block —
+             lives in this one relative container so they all share the
+             exact same horizontal center. Previously the motto/tagline
+             text sat as a sibling of this container instead of inside
+             it, which is why it could drift off-center. */}
           <div className="relative flex h-[min(90vh,820px)] w-[min(94vw,820px)] -translate-y-[3vh] items-center justify-center">
             {/* Perfect orbital system — CSS positioning avoids SVG hydration drift. */}
             <motion.div
@@ -159,8 +164,8 @@ export default function LogoIntro() {
                orbit container itself rotates continuously; each coin sits
                at a fixed left/top on that container so it's carried around
                the circle. Each coin also carries an equal-and-opposite
-               counter-rotation (see below) so the ₹ face stays upright and
-               readable the whole way around instead of tumbling. */}
+               counter-rotation so the ₹ face stays upright and readable
+               the whole way around instead of tumbling. */}
             <motion.div
               className="absolute h-[min(55vw,450px)] w-[min(55vw,450px)]"
               initial={{ opacity: 0, scale: 0.72, rotate: -30 }}
@@ -187,9 +192,6 @@ export default function LogoIntro() {
                       scale: { delay: 0.8 + index * 0.1, duration: 2.4, repeat: Infinity, ease: 'easeInOut' },
                     }}
                   >
-                    {/* Counter-rotation: exactly cancels the parent orbit's
-                       spin (-30 -> 330 over ORBIT_DURATION) so the coin
-                       face never appears to tumble as it travels. */}
                     <motion.div
                       className="absolute inset-0"
                       initial={{ rotate: 30 }}
@@ -239,7 +241,6 @@ export default function LogoIntro() {
                 />
               </motion.div>
 
-              {/* Brand name is kept below the orbital path so the lower coin never crosses it. */}
               <div className="sr-only">FUND CARE — Invest today for better tomorrow.</div>
             </motion.div>
 
@@ -249,39 +250,41 @@ export default function LogoIntro() {
               animate={{ opacity: [0, 1, 0], scaleX: [0, 1, 0] }}
               transition={{ delay: 3.8, duration: 1.7, ease: [0.65, 0, 0.35, 1] }}
             />
-          </div>
 
-          <motion.div
-            className="absolute left-1/2 top-[76%] z-30 w-[min(88vw,520px)] -translate-x-1/2 text-center"
-            initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
-            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ delay: 2.85, duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="font-serif text-[clamp(27px,4.5vw,44px)] font-medium tracking-[0.24em] text-[#f7efd9]">FUND CARE</div>
+            {/* Option A: one centered column — title, divider, tagline,
+               then the small caption directly beneath, all sharing the
+               same center as the orbit above it. */}
             <motion.div
-              className="mx-auto mt-3 h-px w-24 bg-gradient-to-r from-transparent via-[#d9b74b] to-transparent"
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ delay: 3.25, duration: 0.8, ease: 'easeOut' }}
-            />
-            <motion.p
-              className="mt-3 px-3 font-serif text-[clamp(12px,1.55vw,15px)] italic tracking-[0.1em] text-[#d9bd6b]"
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 3.5, duration: 0.8 }}
+              className="absolute left-1/2 top-[78%] z-30 w-[min(88vw,520px)] -translate-x-1/2 text-center"
+              initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ delay: 2.85, duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
             >
-              Invest today for better tomorrow.
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            className="absolute bottom-[8vh] left-1/2 z-20 -translate-x-1/2 text-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 4.4, duration: 1 }}
-          >
-            <div className="text-[9px] uppercase tracking-[0.48em] text-white/30">A smarter future begins here</div>
-          </motion.div>
+              <div className="font-serif text-[clamp(27px,4.5vw,44px)] font-medium tracking-[0.24em] text-[#f7efd9]">FUND CARE</div>
+              <motion.div
+                className="mx-auto mt-3 h-px w-24 bg-gradient-to-r from-transparent via-[#d9b74b] to-transparent"
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ delay: 3.25, duration: 0.8, ease: 'easeOut' }}
+              />
+              <motion.p
+                className="mt-3 px-3 font-serif text-[clamp(12px,1.55vw,15px)] italic tracking-[0.1em] text-[#d9bd6b]"
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 3.5, duration: 0.8 }}
+              >
+                Invest today for better tomorrow.
+              </motion.p>
+              <motion.div
+                className="mt-4 text-[9px] uppercase tracking-[0.48em] text-white/30"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 4.4, duration: 1 }}
+              >
+                A smarter future begins here
+              </motion.div>
+            </motion.div>
+          </div>
 
           <button
             type="button"
