@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -40,21 +41,43 @@ const articles = {
 
 type Slug = keyof typeof articles;
 
+type Article = (typeof articles)[Slug];
+
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return Object.keys(articles).map((slug) => ({ slug }));
 }
 
-export default async function ArticlePage({ params }: { params: { slug: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
   const article = articles[params.slug as Slug];
+  if (!article) return { title: 'Insight not found — Fund Care' };
+  return {
+    title: `${article.title} — Fund Care`,
+    description: article.intro,
+  };
+}
+
+export default function ArticlePage({ params }: { params: { slug: string } }) {
+  const article: Article | undefined = articles[params.slug as Slug];
   if (!article) notFound();
 
   return (
     <main>
       <article className="pt-16 pb-20">
         <div className="wrap max-w-[820px]">
-          <Link href="/insights" className="text-[13px] text-gold-dark dark:text-gold hover:underline">← Back to insights</Link>
+          <Link href="/insights" className="text-[13px] text-gold-dark dark:text-gold hover:underline">
+            ← Back to insights
+          </Link>
+
           <div className="section-kicker mt-10">Financial insight</div>
-          <h1 className="text-[clamp(34px,5vw,56px)] leading-[1.08] text-navy dark:text-ink font-serif">{article.title}</h1>
+          <h1 className="text-[clamp(34px,5vw,56px)] leading-[1.08] text-navy dark:text-ink font-serif">
+            {article.title}
+          </h1>
           <p className="mt-6 text-[18px] leading-8 text-muted max-w-[760px]">{article.intro}</p>
 
           <div className="mt-12 border-t border-[var(--line)] pt-10 space-y-11">
@@ -69,7 +92,9 @@ export default async function ArticlePage({ params }: { params: { slug: string }
 
           <div className="mt-14 border border-[var(--line)] bg-[var(--surface)] p-7">
             <div className="section-kicker">A useful reminder</div>
-            <p className="text-sm leading-7 text-muted">These articles are educational and general in nature. They are not personalised investment, insurance, tax or legal advice. Your circumstances, goals, time horizon and risk tolerance should be considered before making a financial decision.</p>
+            <p className="text-sm leading-7 text-muted">
+              These articles are educational and general in nature. They are not personalised investment, insurance, tax or legal advice. Your circumstances, goals, time horizon and risk tolerance should be considered before making a financial decision.
+            </p>
           </div>
         </div>
       </article>

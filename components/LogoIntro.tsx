@@ -42,7 +42,8 @@ export default function LogoIntro() {
     if (typeof window === 'undefined') return null;
     if (!audioRef.current) {
       try {
-        const AudioCtx = window.AudioContext ||
+        const AudioCtx =
+          window.AudioContext ||
           (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
         if (AudioCtx) audioRef.current = new AudioCtx();
       } catch {
@@ -110,7 +111,6 @@ export default function LogoIntro() {
           aria-modal="true"
           aria-label="Fund Care brand introduction"
         >
-          {/* Deep cinematic atmosphere */}
           <div className="absolute inset-0 pointer-events-none">
             <motion.div
               className="absolute left-1/2 top-1/2 h-[min(85vw,900px)] w-[min(85vw,900px)] -translate-x-1/2 -translate-y-1/2 rounded-full"
@@ -127,24 +127,23 @@ export default function LogoIntro() {
               transition={{ duration: 3.5, ease: 'easeOut' }}
             />
             <motion.div
-              className="absolute left-1/2 top-1/2 h-[1px] w-[120vw] -translate-x-1/2 rotate-[-17deg] bg-gradient-to-r from-transparent via-[#d9b74b]/20 to-transparent blur-[1px]"
+              className="absolute left-1/2 top-1/2 h-px w-[120vw] -translate-x-1/2 rotate-[-17deg] bg-gradient-to-r from-transparent via-[#d9b74b]/20 to-transparent blur-[1px]"
               initial={{ opacity: 0, x: '-25%' }}
               animate={{ opacity: [0, 1, 0], x: ['-25%', '25%'] }}
               transition={{ delay: 2.9, duration: 2.4, ease: 'easeInOut' }}
             />
           </div>
 
-          <div className="relative flex h-[min(90vh,820px)] w-[min(94vw,820px)] -translate-y-[3vh] items-center justify-center">
-            {/* Perfect orbital system — CSS positioning avoids SVG hydration drift. */}
+          <div className="absolute inset-0">
             <motion.div
-              className="absolute h-[min(66vw,540px)] w-[min(66vw,540px)] rounded-full border border-white/[0.06]"
+              className="absolute left-1/2 top-[41%] h-[min(58vw,470px)] w-[min(58vw,470px)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.06]"
               initial={{ opacity: 0, scale: 0.82 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             />
 
             <motion.div
-              className="absolute h-[min(61vw,500px)] w-[min(61vw,500px)] rounded-full border border-[#c9a227]/25"
+              className="absolute left-1/2 top-[41%] h-[min(54vw,430px)] w-[min(54vw,430px)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#c9a227]/25"
               initial={{ opacity: 0, scale: 0.75, rotate: -20 }}
               animate={{ opacity: [0, 1, 0.55], scale: 1, rotate: 340 }}
               transition={{
@@ -154,9 +153,8 @@ export default function LogoIntro() {
               }}
             />
 
-            {/* Six perfectly spaced coins on one true circular path. */}
             <motion.div
-              className="absolute h-[min(55vw,450px)] w-[min(55vw,450px)]"
+              className="absolute left-1/2 top-[41%] h-[min(49vw,390px)] w-[min(49vw,390px)] -translate-x-1/2 -translate-y-1/2"
               initial={{ opacity: 0, scale: 0.72, rotate: -30 }}
               animate={{ opacity: 1, scale: 1, rotate: 330 }}
               transition={{
@@ -167,8 +165,8 @@ export default function LogoIntro() {
             >
               {COINS.map((angle, index) => {
                 const rad = (angle * Math.PI) / 180;
-                const x = 50 + 45 * Math.cos(rad);
-                const y = 50 + 45 * Math.sin(rad);
+                const x = 50 + 46 * Math.cos(rad);
+                const y = 50 + 46 * Math.sin(rad);
                 return (
                   <motion.div
                     key={angle}
@@ -188,27 +186,26 @@ export default function LogoIntro() {
               })}
             </motion.div>
 
-            {/* Real brand mark — no hand-drawn recreation. */}
             <motion.div
-              className="relative z-10 flex flex-col items-center"
+              className="absolute left-1/2 top-[41%] z-10 -translate-x-1/2 -translate-y-1/2"
               initial={{ opacity: 0, scale: 0.78, y: 18 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 1.0, duration: 1.35, ease: [0.16, 1, 0.3, 1] }}
             >
               <motion.div
-                className="relative h-[clamp(220px,31vw,310px)] w-[clamp(220px,31vw,310px)]"
-                animate={{ y: [0, -5, 0] }}
+                className="relative h-[clamp(180px,23vw,230px)] w-[clamp(180px,23vw,230px)]"
+                animate={{ y: [0, -4, 0] }}
                 transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
               >
                 <motion.div
-                  className="absolute inset-[-24px] rounded-full"
-                  style={{ background: 'radial-gradient(circle, rgba(221,183,68,.26), transparent 67%)' }}
+                  className="absolute inset-[-22px] rounded-full"
+                  style={{ background: 'radial-gradient(circle, rgba(221,183,68,.25), transparent 67%)' }}
                   animate={{ scale: [0.94, 1.08, 0.96], opacity: [0.45, 0.8, 0.5] }}
                   transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
                 />
                 <div className="absolute inset-0 rounded-full bg-[#f7efd9] shadow-[0_0_70px_rgba(214,173,56,.2)]" />
                 <motion.div
-                  className="absolute inset-[-10px] rounded-full border border-[#d8b64a]/60"
+                  className="absolute inset-[-9px] rounded-full border border-[#d8b64a]/60"
                   initial={{ opacity: 0, scale: 0.92 }}
                   animate={{ opacity: [0, 1, 0.55], scale: [0.92, 1.03, 1] }}
                   transition={{ delay: 1.25, duration: 1.8 }}
@@ -219,16 +216,13 @@ export default function LogoIntro() {
                   fill
                   priority
                   className="relative z-10 object-contain p-2"
-                  sizes="310px"
+                  sizes="230px"
                 />
               </motion.div>
-
-              {/* Brand name is kept below the orbital path so the lower coin never crosses it. */}
-              <div className="sr-only">FUND CARE — Invest today for better tomorrow.</div>
             </motion.div>
 
             <motion.div
-              className="pointer-events-none absolute left-[-12%] right-[-12%] top-1/2 h-px bg-gradient-to-r from-transparent via-[#f4dc82]/80 to-transparent"
+              className="pointer-events-none absolute left-[15%] right-[15%] top-[41%] h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-[#f4dc82]/70 to-transparent"
               initial={{ opacity: 0, scaleX: 0 }}
               animate={{ opacity: [0, 1, 0], scaleX: [0, 1, 0] }}
               transition={{ delay: 3.8, duration: 1.7, ease: [0.65, 0, 0.35, 1] }}
@@ -236,35 +230,20 @@ export default function LogoIntro() {
           </div>
 
           <motion.div
-            className="absolute left-1/2 top-[76%] z-30 w-[min(88vw,520px)] -translate-x-1/2 text-center"
-            initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
+            className="absolute left-1/2 top-[72%] z-30 w-[min(90vw,620px)] -translate-x-1/2 -translate-y-1/2 text-center"
+            initial={{ opacity: 0, y: 16, filter: 'blur(8px)' }}
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ delay: 2.85, duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="font-serif text-[clamp(27px,4.5vw,44px)] font-medium tracking-[0.24em] text-[#f7efd9]">FUND CARE</div>
             <motion.div
-              className="mx-auto mt-3 h-px w-24 bg-gradient-to-r from-transparent via-[#d9b74b] to-transparent"
+              className="mx-auto mb-4 h-px w-20 bg-gradient-to-r from-transparent via-[#d9b74b] to-transparent"
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{ scaleX: 1, opacity: 1 }}
               transition={{ delay: 3.25, duration: 0.8, ease: 'easeOut' }}
             />
-            <motion.p
-              className="mt-3 px-3 font-serif text-[clamp(12px,1.55vw,15px)] italic tracking-[0.1em] text-[#d9bd6b]"
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 3.5, duration: 0.8 }}
-            >
+            <p className="font-serif text-[clamp(17px,2.2vw,24px)] italic tracking-[0.08em] text-[#e2c879]">
               Invest today for better tomorrow.
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            className="absolute bottom-[8vh] left-1/2 z-20 -translate-x-1/2 text-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 4.4, duration: 1 }}
-          >
-            <div className="text-[9px] uppercase tracking-[0.48em] text-white/30">A smarter future begins here</div>
+            </p>
           </motion.div>
 
           <button

@@ -26,7 +26,9 @@ export default function InsightsPage() {
       <section className="pt-16 pb-10 border-b border-[var(--line)]">
         <div className="wrap">
           <div className="section-kicker">Insights</div>
-          <h1 className="text-[clamp(30px,4vw,44px)] text-navy dark:text-ink font-serif">Notes on planning, not predictions on markets.</h1>
+          <h1 className="text-[clamp(30px,4vw,44px)] text-navy dark:text-ink font-serif">
+            Notes on planning, not predictions on markets.
+          </h1>
           <p className="text-muted max-w-[620px] mt-3.5">
             Practical explainers designed to make important financial decisions easier to understand. No market predictions, no unnecessary jargon.
           </p>
@@ -40,7 +42,10 @@ export default function InsightsPage() {
               <div className="font-serif text-xs text-gold-dark dark:text-gold mb-4">Insight</div>
               <h2 className="text-[19px] text-navy dark:text-ink mb-2.5 font-medium">{post.title}</h2>
               <p className="text-sm text-muted mb-6 flex-1">{post.desc}</p>
-              <Link href={`/insights/${post.slug}`} className="text-[13px] text-gold-dark dark:text-gold hover:underline">
+              <Link
+                href={`/insights/${post.slug}`}
+                className="inline-flex w-fit text-[13px] text-gold-dark dark:text-gold hover:underline focus:outline-none focus:ring-2 focus:ring-gold/40"
+              >
                 Read full article →
               </Link>
             </article>
