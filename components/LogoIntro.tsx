@@ -134,17 +134,17 @@ export default function LogoIntro() {
             />
           </div>
 
-          <div className="relative flex h-[min(88vh,780px)] w-[min(92vw,780px)] items-center justify-center">
+          <div className="relative flex h-[min(90vh,820px)] w-[min(94vw,820px)] -translate-y-[3vh] items-center justify-center">
             {/* Perfect orbital system — CSS positioning avoids SVG hydration drift. */}
             <motion.div
-              className="absolute h-[min(78vw,650px)] w-[min(78vw,650px)] rounded-full border border-white/[0.06]"
+              className="absolute h-[min(66vw,540px)] w-[min(66vw,540px)] rounded-full border border-white/[0.06]"
               initial={{ opacity: 0, scale: 0.82 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             />
 
             <motion.div
-              className="absolute h-[min(72vw,600px)] w-[min(72vw,600px)] rounded-full border border-[#c9a227]/25"
+              className="absolute h-[min(61vw,500px)] w-[min(61vw,500px)] rounded-full border border-[#c9a227]/25"
               initial={{ opacity: 0, scale: 0.75, rotate: -20 }}
               animate={{ opacity: [0, 1, 0.55], scale: 1, rotate: 340 }}
               transition={{
@@ -156,7 +156,7 @@ export default function LogoIntro() {
 
             {/* Six perfectly spaced coins on one true circular path. */}
             <motion.div
-              className="absolute h-[min(66vw,550px)] w-[min(66vw,550px)]"
+              className="absolute h-[min(55vw,450px)] w-[min(55vw,450px)]"
               initial={{ opacity: 0, scale: 0.72, rotate: -30 }}
               animate={{ opacity: 1, scale: 1, rotate: 330 }}
               transition={{
@@ -172,7 +172,7 @@ export default function LogoIntro() {
                 return (
                   <motion.div
                     key={angle}
-                    className="absolute left-1/2 top-1/2 h-11 w-11 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#f4d976]/70 bg-[radial-gradient(circle_at_35%_30%,#fff1a8_0%,#d7ad32_38%,#9b7417_100%)] shadow-[0_0_18px_rgba(201,162,39,.22)]"
+                    className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#f4d976]/70 bg-[radial-gradient(circle_at_35%_30%,#fff1a8_0%,#d7ad32_38%,#9b7417_100%)] shadow-[0_0_18px_rgba(201,162,39,.22)]"
                     style={{ left: `${x}%`, top: `${y}%` }}
                     initial={{ opacity: 0, scale: 0.2 }}
                     animate={{ opacity: 1, scale: [0.9, 1, 0.96, 1] }}
@@ -182,7 +182,7 @@ export default function LogoIntro() {
                     }}
                   >
                     <span className="absolute inset-[5px] rounded-full border border-[#fff1a8]/45" />
-                    <span className="relative z-10 flex h-full w-full items-center justify-center font-serif text-[19px] text-[#17304e]">₹</span>
+                    <span className="relative z-10 flex h-full w-full items-center justify-center font-serif text-[17px] text-[#17304e]">₹</span>
                   </motion.div>
                 );
               })}
@@ -196,7 +196,7 @@ export default function LogoIntro() {
               transition={{ delay: 1.0, duration: 1.35, ease: [0.16, 1, 0.3, 1] }}
             >
               <motion.div
-                className="relative h-[clamp(230px,36vw,340px)] w-[clamp(230px,36vw,340px)]"
+                className="relative h-[clamp(220px,31vw,310px)] w-[clamp(220px,31vw,310px)]"
                 animate={{ y: [0, -5, 0] }}
                 transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
               >
@@ -219,32 +219,12 @@ export default function LogoIntro() {
                   fill
                   priority
                   className="relative z-10 object-contain p-2"
-                  sizes="340px"
+                  sizes="310px"
                 />
               </motion.div>
 
-              <motion.div
-                className="mt-9 text-center"
-                initial={{ opacity: 0, y: 16, filter: 'blur(8px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                transition={{ delay: 2.85, duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <div className="font-serif text-[clamp(29px,5vw,48px)] font-medium tracking-[0.24em] text-[#f7efd9]">FUND CARE</div>
-                <motion.div
-                  className="mx-auto mt-4 h-px w-28 bg-gradient-to-r from-transparent via-[#d9b74b] to-transparent"
-                  initial={{ scaleX: 0, opacity: 0 }}
-                  animate={{ scaleX: 1, opacity: 1 }}
-                  transition={{ delay: 3.25, duration: 0.8, ease: 'easeOut' }}
-                />
-                <motion.p
-                  className="mt-4 font-serif text-[clamp(13px,1.7vw,16px)] italic tracking-[0.11em] text-[#d9bd6b]"
-                  initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 3.5, duration: 0.8 }}
-                >
-                  Invest today for better tomorrow.
-                </motion.p>
-              </motion.div>
+              {/* Brand name is kept below the orbital path so the lower coin never crosses it. */}
+              <div className="sr-only">FUND CARE — Invest today for better tomorrow.</div>
             </motion.div>
 
             <motion.div
@@ -256,7 +236,30 @@ export default function LogoIntro() {
           </div>
 
           <motion.div
-            className="absolute bottom-[7vh] left-1/2 -translate-x-1/2 text-center"
+            className="absolute left-1/2 top-[76%] z-30 w-[min(88vw,520px)] -translate-x-1/2 text-center"
+            initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ delay: 2.85, duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="font-serif text-[clamp(27px,4.5vw,44px)] font-medium tracking-[0.24em] text-[#f7efd9]">FUND CARE</div>
+            <motion.div
+              className="mx-auto mt-3 h-px w-24 bg-gradient-to-r from-transparent via-[#d9b74b] to-transparent"
+              initial={{ scaleX: 0, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ delay: 3.25, duration: 0.8, ease: 'easeOut' }}
+            />
+            <motion.p
+              className="mt-3 px-3 font-serif text-[clamp(12px,1.55vw,15px)] italic tracking-[0.1em] text-[#d9bd6b]"
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 3.5, duration: 0.8 }}
+            >
+              Invest today for better tomorrow.
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            className="absolute bottom-[8vh] left-1/2 z-20 -translate-x-1/2 text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 4.4, duration: 1 }}
