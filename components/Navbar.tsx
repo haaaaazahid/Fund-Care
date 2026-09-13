@@ -24,7 +24,6 @@ export default function Navbar() {
 
           <ul className="hidden md:flex items-center gap-7">
             <li><Link href="/" className="nav-link text-sm">Home</Link></li>
-            <li><Link href="/about" className="nav-link text-sm">About</Link></li>
             <li
               className="relative"
               onMouseEnter={() => setMegaOpen(true)}
@@ -65,7 +64,9 @@ export default function Navbar() {
               </AnimatePresence>
             </li>
             <li><Link href="/calculators" className="nav-link text-sm">Calculators</Link></li>
+            <li><Link href="/about#experience" className="nav-link text-sm">Experience</Link></li>
             <li><Link href="/insights" className="nav-link text-sm">Insights</Link></li>
+            <li><Link href="/about" className="nav-link text-sm">About</Link></li>
             <li><Link href="/contact" className="nav-link text-sm">Contact</Link></li>
           </ul>
 
@@ -119,9 +120,10 @@ export default function Navbar() {
                   </Link>
                 ))}
               </div>
-              <Link href="/about" className="mobile-link" onClick={() => setMobileOpen(false)}>About</Link>
               <Link href="/calculators" className="mobile-link" onClick={() => setMobileOpen(false)}>Calculators</Link>
+              <Link href="/about#experience" className="mobile-link" onClick={() => setMobileOpen(false)}>Experience</Link>
               <Link href="/insights" className="mobile-link" onClick={() => setMobileOpen(false)}>Insights</Link>
+              <Link href="/about" className="mobile-link" onClick={() => setMobileOpen(false)}>About</Link>
               <Link href="/contact" className="mobile-link" onClick={() => setMobileOpen(false)}>Contact</Link>
               <Link href="/book-appointment" className="btn-gold w-full justify-center mt-5" onClick={() => setMobileOpen(false)}>
                 Book Appointment

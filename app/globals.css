@@ -83,3 +83,30 @@ input[type='range'] {
     @apply bg-[var(--surface)] border border-[var(--line)];
   }
 }
+
+/* Global layout guardrails */
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100dvh;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  font: inherit;
+}

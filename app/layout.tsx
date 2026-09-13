@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="font-sans">
+      <body className="font-sans antialiased">
         <ThemeProvider>
           <LogoIntro />
           <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:z-[1000] bg-gold text-navy px-4 py-2.5 text-sm">
