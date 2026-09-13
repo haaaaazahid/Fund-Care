@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #0b2545;
+  --gold: #c9a227;
+  --gold-dark: #8c6e1a;
+  --gold-pale: #f3e9c7;
+  --ivory: #faf6ec;
+  --ink: #1c2230;
+  --muted: #656c7a;
+  --line: #e7e0cc;
+  --bg: var(--ivory);
+  --surface: #ffffff;
+}
+.dark {
+  --bg: #081226;
+  --surface: #0d1b36;
+  --navy: #0f2245;
+  --ink: #eaf0ff;
+  --muted: #8ca0c8;
+  --line: rgba(124, 178, 255, 0.18);
+  --gold: #d8b646;
+  --gold-pale: #1a2540;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  transition: background 0.4s ease, color 0.4s ease;
+}
+::selection {
+  background: var(--gold);
+  color: var(--navy);
+}
+.wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+@media (max-width: 600px) {
+  .wrap {
+    padding: 0 20px;
+  }
+}
+input[type='range'] {
+  accent-color: var(--gold-dark);
+}
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+@layer components {
+  .nav-link {
+    @apply relative py-2 text-[var(--ink)];
+  }
+  .nav-link::after {
+    content: '';
+    @apply absolute left-0 bottom-0 w-0 h-px bg-gold transition-all duration-200;
+  }
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+  .btn-gold {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium bg-gold text-navy hover:bg-gold-dark hover:text-white transition-colors;
+  }
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border border-navy text-navy dark:border-ink dark:text-ink hover:bg-navy hover:text-white dark:hover:bg-ink dark:hover:text-navy transition-colors;
+  }
+  .mobile-link {
+    @apply block py-4 text-[17px] font-serif border-b border-[var(--line)] text-[var(--ink)];
+  }
+  .section-kicker {
+    @apply text-sm text-gold-dark dark:text-gold font-serif italic mb-3.5;
+  }
+  .card {
+    @apply bg-[var(--surface)] border border-[var(--line)];
+  }
+}
