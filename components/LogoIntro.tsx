@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 
 const INTRO_MS = 7600;
 const COINS = [0, 60, 120, 180, 240, 300];
+const ORBIT_DURATION = 18;
 
 export default function LogoIntro() {
   const [visible, setVisible] = useState(true);
@@ -154,7 +155,12 @@ export default function LogoIntro() {
               }}
             />
 
-            {/* Six perfectly spaced coins on one true circular path. */}
+            {/* Six perfectly spaced coins on one true circular path. The
+               orbit container itself rotates continuously; each coin sits
+               at a fixed left/top on that container so it's carried around
+               the circle. Each coin also carries an equal-and-opposite
+               counter-rotation (see below) so the ₹ face stays upright and
+               readable the whole way around instead of tumbling. */}
             <motion.div
               className="absolute h-[min(55vw,450px)] w-[min(55vw,450px)]"
               initial={{ opacity: 0, scale: 0.72, rotate: -30 }}
@@ -162,7 +168,7 @@ export default function LogoIntro() {
               transition={{
                 opacity: { duration: 1, delay: 0.7 },
                 scale: { duration: 1.2, delay: 0.65, ease: [0.22, 1, 0.36, 1] },
-                rotate: { duration: 18, repeat: Infinity, ease: 'linear' },
+                rotate: { duration: ORBIT_DURATION, repeat: Infinity, ease: 'linear' },
               }}
             >
               {COINS.map((angle, index) => {
@@ -181,8 +187,18 @@ export default function LogoIntro() {
                       scale: { delay: 0.8 + index * 0.1, duration: 2.4, repeat: Infinity, ease: 'easeInOut' },
                     }}
                   >
-                    <span className="absolute inset-[5px] rounded-full border border-[#fff1a8]/45" />
-                    <span className="relative z-10 flex h-full w-full items-center justify-center font-serif text-[17px] text-[#17304e]">₹</span>
+                    {/* Counter-rotation: exactly cancels the parent orbit's
+                       spin (-30 -> 330 over ORBIT_DURATION) so the coin
+                       face never appears to tumble as it travels. */}
+                    <motion.div
+                      className="absolute inset-0"
+                      initial={{ rotate: 30 }}
+                      animate={{ rotate: -330 }}
+                      transition={{ duration: ORBIT_DURATION, repeat: Infinity, ease: 'linear' }}
+                    >
+                      <span className="absolute inset-[5px] rounded-full border border-[#fff1a8]/45" />
+                      <span className="relative z-10 flex h-full w-full items-center justify-center font-serif text-[17px] text-[#17304e]">₹</span>
+                    </motion.div>
                   </motion.div>
                 );
               })}
