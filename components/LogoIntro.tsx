@@ -136,154 +136,161 @@ export default function LogoIntro() {
           </div>
 
           {/* Everything below — rings, coins, logo, and the text block —
-             lives in this one relative container so they all share the
-             exact same horizontal center. Previously the motto/tagline
-             text sat as a sibling of this container instead of inside
-             it, which is why it could drift off-center. */}
-          <div className="relative flex h-[min(90vh,820px)] w-[min(94vw,820px)] -translate-y-[3vh] items-center justify-center">
-            {/* Perfect orbital system — CSS positioning avoids SVG hydration drift. */}
-            <motion.div
-              className="absolute h-[min(66vw,540px)] w-[min(66vw,540px)] rounded-full border border-white/[0.06]"
-              initial={{ opacity: 0, scale: 0.82 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            />
-
-            <motion.div
-              className="absolute h-[min(61vw,500px)] w-[min(61vw,500px)] rounded-full border border-[#c9a227]/25"
-              initial={{ opacity: 0, scale: 0.75, rotate: -20 }}
-              animate={{ opacity: [0, 1, 0.55], scale: 1, rotate: 340 }}
-              transition={{
-                opacity: { duration: 1.2, delay: 0.35 },
-                scale: { duration: 1.3, delay: 0.25, ease: [0.22, 1, 0.36, 1] },
-                rotate: { duration: 20, repeat: Infinity, ease: 'linear' },
-              }}
-            />
-
-            {/* Six perfectly spaced coins on one true circular path. The
-               orbit container itself rotates continuously; each coin sits
-               at a fixed left/top on that container so it's carried around
-               the circle. Each coin also carries an equal-and-opposite
-               counter-rotation so the ₹ face stays upright and readable
-               the whole way around instead of tumbling. */}
-            <motion.div
-              className="absolute h-[min(55vw,450px)] w-[min(55vw,450px)]"
-              initial={{ opacity: 0, scale: 0.72, rotate: -30 }}
-              animate={{ opacity: 1, scale: 1, rotate: 330 }}
-              transition={{
-                opacity: { duration: 1, delay: 0.7 },
-                scale: { duration: 1.2, delay: 0.65, ease: [0.22, 1, 0.36, 1] },
-                rotate: { duration: ORBIT_DURATION, repeat: Infinity, ease: 'linear' },
-              }}
-            >
-              {COINS.map((angle, index) => {
-                const rad = (angle * Math.PI) / 180;
-                const x = 50 + 45 * Math.cos(rad);
-                const y = 50 + 45 * Math.sin(rad);
-                return (
-                  <motion.div
-                    key={angle}
-                    className="absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#f4d976]/70 bg-[radial-gradient(circle_at_35%_30%,#fff1a8_0%,#d7ad32_38%,#9b7417_100%)] shadow-[0_0_18px_rgba(201,162,39,.22)]"
-                    style={{ left: `${x}%`, top: `${y}%` }}
-                    initial={{ opacity: 0, scale: 0.2 }}
-                    animate={{ opacity: 1, scale: [0.9, 1, 0.96, 1] }}
-                    transition={{
-                      opacity: { delay: 0.8 + index * 0.1, duration: 0.35 },
-                      scale: { delay: 0.8 + index * 0.1, duration: 2.4, repeat: Infinity, ease: 'easeInOut' },
-                    }}
-                  >
-                    <motion.div
-                      className="absolute inset-0"
-                      initial={{ rotate: 30 }}
-                      animate={{ rotate: -330 }}
-                      transition={{ duration: ORBIT_DURATION, repeat: Infinity, ease: 'linear' }}
-                    >
-                      <span className="absolute inset-[5px] rounded-full border border-[#fff1a8]/45" />
-                      <span className="relative z-10 flex h-full w-full items-center justify-center font-serif text-[17px] text-[#17304e]">₹</span>
-                    </motion.div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-
-            {/* Real brand mark — no hand-drawn recreation. */}
-            <motion.div
-              className="relative z-10 flex flex-col items-center"
-              initial={{ opacity: 0, scale: 0.78, y: 18 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 1.0, duration: 1.35, ease: [0.16, 1, 0.3, 1] }}
-            >
+             lives in this one relative column so nothing has to guess at
+             where "center" is: each row uses w-full + flex justify-center,
+             which always centers on the true render width, regardless of
+             container/transform quirks upstream. Sizes trimmed down a
+             notch (was 66vw/61vw/55vw rings, 31vw logo). */}
+          <div className="relative flex h-[min(90vh,820px)] w-[min(94vw,820px)] -translate-y-[3vh] flex-col items-center justify-center">
+            <div className="relative flex h-[min(58vw,460px)] w-[min(58vw,460px)] items-center justify-center">
+              {/* Perfect orbital system — CSS positioning avoids SVG hydration drift. */}
               <motion.div
-                className="relative h-[clamp(220px,31vw,310px)] w-[clamp(220px,31vw,310px)]"
-                animate={{ y: [0, -5, 0] }}
-                transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <motion.div
-                  className="absolute inset-[-24px] rounded-full"
-                  style={{ background: 'radial-gradient(circle, rgba(221,183,68,.26), transparent 67%)' }}
-                  animate={{ scale: [0.94, 1.08, 0.96], opacity: [0.45, 0.8, 0.5] }}
-                  transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-                />
-                <div className="absolute inset-0 rounded-full bg-[#f7efd9] shadow-[0_0_70px_rgba(214,173,56,.2)]" />
-                <motion.div
-                  className="absolute inset-[-10px] rounded-full border border-[#d8b64a]/60"
-                  initial={{ opacity: 0, scale: 0.92 }}
-                  animate={{ opacity: [0, 1, 0.55], scale: [0.92, 1.03, 1] }}
-                  transition={{ delay: 1.25, duration: 1.8 }}
-                />
-                <Image
-                  src="/logo.svg"
-                  alt="Fund Care"
-                  fill
-                  priority
-                  className="relative z-10 object-contain p-2"
-                  sizes="310px"
-                />
-              </motion.div>
-
-              <div className="sr-only">FUND CARE — Invest today for better tomorrow.</div>
-            </motion.div>
-
-            <motion.div
-              className="pointer-events-none absolute left-[-12%] right-[-12%] top-1/2 h-px bg-gradient-to-r from-transparent via-[#f4dc82]/80 to-transparent"
-              initial={{ opacity: 0, scaleX: 0 }}
-              animate={{ opacity: [0, 1, 0], scaleX: [0, 1, 0] }}
-              transition={{ delay: 3.8, duration: 1.7, ease: [0.65, 0, 0.35, 1] }}
-            />
-
-            {/* Option A: one centered column — title, divider, tagline,
-               then the small caption directly beneath, all sharing the
-               same center as the orbit above it. */}
-            <motion.div
-              className="absolute left-1/2 top-[78%] z-30 w-[min(88vw,520px)] -translate-x-1/2 text-center"
-              initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              transition={{ delay: 2.85, duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <div className="font-serif text-[clamp(27px,4.5vw,44px)] font-medium tracking-[0.24em] text-[#f7efd9]">FUND CARE</div>
-              <motion.div
-                className="mx-auto mt-3 h-px w-24 bg-gradient-to-r from-transparent via-[#d9b74b] to-transparent"
-                initial={{ scaleX: 0, opacity: 0 }}
-                animate={{ scaleX: 1, opacity: 1 }}
-                transition={{ delay: 3.25, duration: 0.8, ease: 'easeOut' }}
+                className="absolute h-[min(58vw,460px)] w-[min(58vw,460px)] rounded-full border border-white/[0.06]"
+                initial={{ opacity: 0, scale: 0.82 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               />
-              <motion.p
-                className="mt-3 px-3 font-serif text-[clamp(12px,1.55vw,15px)] italic tracking-[0.1em] text-[#d9bd6b]"
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 3.5, duration: 0.8 }}
-              >
-                Invest today for better tomorrow.
-              </motion.p>
+
               <motion.div
-                className="mt-4 text-[9px] uppercase tracking-[0.48em] text-white/30"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 4.4, duration: 1 }}
+                className="absolute h-[min(53vw,425px)] w-[min(53vw,425px)] rounded-full border border-[#c9a227]/25"
+                initial={{ opacity: 0, scale: 0.75, rotate: -20 }}
+                animate={{ opacity: [0, 1, 0.55], scale: 1, rotate: 340 }}
+                transition={{
+                  opacity: { duration: 1.2, delay: 0.35 },
+                  scale: { duration: 1.3, delay: 0.25, ease: [0.22, 1, 0.36, 1] },
+                  rotate: { duration: 20, repeat: Infinity, ease: 'linear' },
+                }}
+              />
+
+              {/* Six perfectly spaced coins on one true circular path. The
+                 orbit container itself rotates continuously; each coin sits
+                 at a fixed left/top on that container so it's carried
+                 around the circle. Each coin also carries an
+                 equal-and-opposite counter-rotation so the ₹ face stays
+                 upright and readable the whole way around instead of
+                 tumbling. */}
+              <motion.div
+                className="absolute h-[min(48vw,380px)] w-[min(48vw,380px)]"
+                initial={{ opacity: 0, scale: 0.72, rotate: -30 }}
+                animate={{ opacity: 1, scale: 1, rotate: 330 }}
+                transition={{
+                  opacity: { duration: 1, delay: 0.7 },
+                  scale: { duration: 1.2, delay: 0.65, ease: [0.22, 1, 0.36, 1] },
+                  rotate: { duration: ORBIT_DURATION, repeat: Infinity, ease: 'linear' },
+                }}
               >
-                A smarter future begins here
+                {COINS.map((angle, index) => {
+                  const rad = (angle * Math.PI) / 180;
+                  const x = 50 + 45 * Math.cos(rad);
+                  const y = 50 + 45 * Math.sin(rad);
+                  return (
+                    <motion.div
+                      key={angle}
+                      className="absolute left-1/2 top-1/2 h-9 w-9 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#f4d976]/70 bg-[radial-gradient(circle_at_35%_30%,#fff1a8_0%,#d7ad32_38%,#9b7417_100%)] shadow-[0_0_18px_rgba(201,162,39,.22)]"
+                      style={{ left: `${x}%`, top: `${y}%` }}
+                      initial={{ opacity: 0, scale: 0.2 }}
+                      animate={{ opacity: 1, scale: [0.9, 1, 0.96, 1] }}
+                      transition={{
+                        opacity: { delay: 0.8 + index * 0.1, duration: 0.35 },
+                        scale: { delay: 0.8 + index * 0.1, duration: 2.4, repeat: Infinity, ease: 'easeInOut' },
+                      }}
+                    >
+                      <motion.div
+                        className="absolute inset-0"
+                        initial={{ rotate: 30 }}
+                        animate={{ rotate: -330 }}
+                        transition={{ duration: ORBIT_DURATION, repeat: Infinity, ease: 'linear' }}
+                      >
+                        <span className="absolute inset-[5px] rounded-full border border-[#fff1a8]/45" />
+                        <span className="relative z-10 flex h-full w-full items-center justify-center font-serif text-[15px] text-[#17304e]">₹</span>
+                      </motion.div>
+                    </motion.div>
+                  );
+                })}
               </motion.div>
-            </motion.div>
+
+              {/* Real brand mark — no hand-drawn recreation. */}
+              <motion.div
+                className="relative z-10 flex flex-col items-center"
+                initial={{ opacity: 0, scale: 0.78, y: 18 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ delay: 1.0, duration: 1.35, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <motion.div
+                  className="relative h-[clamp(190px,27vw,270px)] w-[clamp(190px,27vw,270px)]"
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <motion.div
+                    className="absolute inset-[-24px] rounded-full"
+                    style={{ background: 'radial-gradient(circle, rgba(221,183,68,.26), transparent 67%)' }}
+                    animate={{ scale: [0.94, 1.08, 0.96], opacity: [0.45, 0.8, 0.5] }}
+                    transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                  <div className="absolute inset-0 rounded-full bg-[#f7efd9] shadow-[0_0_70px_rgba(214,173,56,.2)]" />
+                  <motion.div
+                    className="absolute inset-[-10px] rounded-full border border-[#d8b64a]/60"
+                    initial={{ opacity: 0, scale: 0.92 }}
+                    animate={{ opacity: [0, 1, 0.55], scale: [0.92, 1.03, 1] }}
+                    transition={{ delay: 1.25, duration: 1.8 }}
+                  />
+                  <Image
+                    src="/logo.svg"
+                    alt="Fund Care"
+                    fill
+                    priority
+                    className="relative z-10 object-contain p-2"
+                    sizes="270px"
+                  />
+                </motion.div>
+
+                <div className="sr-only">FUND CARE — Invest today for better tomorrow.</div>
+              </motion.div>
+
+              <motion.div
+                className="pointer-events-none absolute left-[-12%] right-[-12%] top-1/2 h-px bg-gradient-to-r from-transparent via-[#f4dc82]/80 to-transparent"
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: [0, 1, 0], scaleX: [0, 1, 0] }}
+                transition={{ delay: 3.8, duration: 1.7, ease: [0.65, 0, 0.35, 1] }}
+              />
+            </div>
+
+            {/* Text row: full-width band, centered with flex justify-center
+               instead of left-1/2 + a negative transform. This always
+               centers on the actual rendered width, so it can't drift
+               off-axis the way transform-based centering can. */}
+            <div className="mt-10 flex w-full justify-center px-4">
+              <motion.div
+                className="w-[min(88vw,520px)] text-center"
+                initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                transition={{ delay: 2.85, duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <div className="font-serif text-[clamp(27px,4.5vw,44px)] font-medium tracking-[0.24em] text-[#f7efd9]">FUND CARE</div>
+                <motion.div
+                  className="mx-auto mt-3 h-px w-24 bg-gradient-to-r from-transparent via-[#d9b74b] to-transparent"
+                  initial={{ scaleX: 0, opacity: 0 }}
+                  animate={{ scaleX: 1, opacity: 1 }}
+                  transition={{ delay: 3.25, duration: 0.8, ease: 'easeOut' }}
+                />
+                <motion.p
+                  className="mt-3 px-3 font-serif text-[clamp(12px,1.55vw,15px)] italic tracking-[0.1em] text-[#d9bd6b]"
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 3.5, duration: 0.8 }}
+                >
+                  Invest today for better tomorrow.
+                </motion.p>
+                <motion.div
+                  className="mt-4 text-[9px] uppercase tracking-[0.48em] text-white/30"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 4.4, duration: 1 }}
+                >
+                  A smarter future begins here
+                </motion.div>
+              </motion.div>
+            </div>
           </div>
 
           <button
